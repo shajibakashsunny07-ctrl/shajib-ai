@@ -5,7 +5,7 @@ st.set_page_config(page_title="SHAJIB AI", page_icon="🤖")
 st.title("🤖 SHAJIB AI")
 st.caption("Created by Shajib Akash Sunny")
 
-cliengroq_key = st.text_input("Groq API Key(
+groq_key = st.text_input("Groq API Key(
 ", type="password")
 if not groq_key:
     st.stop()
