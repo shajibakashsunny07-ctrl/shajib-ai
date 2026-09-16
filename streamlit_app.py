@@ -5,7 +5,11 @@ st.set_page_config(page_title="SHAJIB AI", page_icon="🤖")
 st.title("🤖 SHAJIB AI")
 st.caption("Created by Shajib Akash Sunny")
 
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+cliengroq_key = st.text_input("Groq API Key(
+", type="password")
+if not groq_key:
+    st.stop()
+client = Groq(api_key=groq_key.strip())
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
