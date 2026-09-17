@@ -1,7 +1,7 @@
 import streamlit as st
 from groq import Groq
 
-st.set_page_config(page_title="SHAJIB AI")
+st.set_page_config(page_title="SHAJIB AI", page_icon="🤖")
 st.title("🤖 SHAJIB AI")
 st.caption("Created by Shajib Akash Sunny")
 
@@ -22,12 +22,13 @@ for m in st.session_state.messages:
 if prompt := st.chat_input("তোমার প্রশ্ন লেখো..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
-
-    response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=st.session_state.messages
-    )
-    answer = response.choices[0].message.content
-
-    st.session_state.messages.append({"role": "assistant", "content": answer})
-    st.chat_message("assistant").write(answer)
+    try:
+        res = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=st.session_state.messages
+        )
+        ans = res.choices[0].message.content
+    except Exception as e:
+        ans = f"Error: {e}"
+    st.session_state.messages.append({"role": "assistant", "content": ans})
+    st.chat_message("assistant").write(ans)
